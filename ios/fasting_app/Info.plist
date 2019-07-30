@@ -23,6 +23,22 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string>com.isaacmanubag.fastingapp</string>
+        </array>
+    </dict>
+		<dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string>com.googleusercontent.apps.1050830759732-tk420v2utflel0ab7ug1gcdne0p3n5tt</string>
+        </array>
+    </dict>
+		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb496611707741304</string>

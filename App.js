@@ -1,80 +1,135 @@
-/**
- * @format
- * @flow
- */
-
 import React from 'react';
-import { SafeAreaView, StyleSheet, Text } from 'react-native';
+import { AppRegistry, StatusBar, AsyncStorage } from 'react-native';
 import firebase from 'react-native-firebase';
-import { AccessToken, LoginManager } from 'react-native-fbsdk';
-import { GoogleSignin } from 'react-native-google-signin';
-import Colors from './src/utils/colors';
+import { Provider } from 'react-redux';
+import { Text } from 'react-native';
+import { PersistGate } from 'redux-persist/integration/react';
+import Store, { persistor } from './src/redux';
+import Application from './src/components/Application';
+import Rehydrating from './src/components/Rehydrating';
+import { name as appName } from './app.json';
+import bgMessaging from './bgMessaging';
+import NavigationService from './NavigationService';
 
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-console */
 
-// Calling the following function will open the FB login dialogue:
-export async function facebookLogin() {
-  try {
-    const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
+const store = Store();
 
-    if (result.isCancelled) {
-      // handle this however suites the flow of your app
-      throw new Error('User cancelled request'); 
+export default class FastingApp extends React.Component {
+  async componentDidMount() {
+    // this.checkPermission();
+    // this.createNotificationListeners();
+  }
+
+  async checkPermission() {
+    const enabled = await firebase.messaging().hasPermission();
+    if (enabled) {
+      this.getToken();
+    } else {
+      this.requestPermission();
     }
+  }
 
-    console.log(`Login success with permissions: ${result.grantedPermissions.toString()}`);
+  showAlert(a, b, data) {
+    console.table({
+      a,
+      b,
+    });
+    console.table(data);
+  }
 
-    // get the access token
-    const data = await AccessToken.getCurrentAccessToken();
+  async createNotificationListeners() {
+    /*
+     * Triggered when a particular notification has been received in foreground
+     * */
+    this.notificationListener = firebase.notifications().onNotification((notification) => {
+      const localNotification = new firebase.notifications.Notification({
+        sound: 'default',
+        show_in_foreground: true,
+      })
+        .setNotificationId(notification.notificationId)
+        .setTitle(notification.title)
+        .setBody(notification.body)
+        .setData(notification.data)
+        .android.setChannelId('fcm_default_channel') // e.g. the id you chose above
+        .android.setSmallIcon('@drawable/ic_launcher') // create this icon in Android Studio
+        .android.setColor('#000000') // you can set a color here
+        .android.setPriority(firebase.notifications.Android.Priority.High);
 
-    if (!data) {
-      // handle this however suites the flow of your app
-      throw new Error('Something went wrong obtaining the users access token');
+      firebase
+        .notifications()
+        .displayNotification(localNotification)
+        .catch(err => console.error(err));
+    });
+
+    /*
+     * If your app is in background, you can listen for when a notification
+     * is clicked / tapped / opened as follows:
+     * */
+    this.notificationOpenedListener = firebase
+      .notifications()
+      .onNotificationOpened((notificationOpen) => {
+        const { title, body, data } = notificationOpen.notification;
+        NavigationService.navigate('STATISTICS');
+        this.showAlert(title, body, data);
+      });
+
+    /*
+     * If your app is closed, you can check if it was opened by a notification being
+     * clicked / tapped / opened as follows:
+     * */
+    const notificationOpen = await firebase.notifications().getInitialNotification();
+    if (notificationOpen) {
+      const { title, body, data } = notificationOpen.notification;
+      NavigationService.navigate('STATISTICS');
+      this.showAlert(title, body, data);
     }
+    /*
+     * Triggered for data only payload in foreground
+     * */
+    this.messageListener = firebase.messaging().onMessage((message) => {
+      console.log(JSON.stringify(message));
+    });
+  }
 
-    // create a new firebase credential with the token
-    const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
+  async getToken() {
+    let fcmToken = await AsyncStorage.getItem('fcmToken');
+    if (!fcmToken) {
+      fcmToken = await firebase.messaging().getToken();
+      if (fcmToken) {
+        await AsyncStorage.setItem('fcmToken', fcmToken);
+      }
+    }
+    console.log('fcmToken:', fcmToken);
+  }
 
-    // login with credential
-    const firebaseUserCredential = await firebase.auth().signInWithCredential(credential);
+  async requestPermission() {
+    try {
+      await firebase.messaging().requestPermission();
+      this.getToken();
+    } catch (error) {
+      console.log('permission rejected');
+    }
+  }
 
-    console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()))
-  } catch (e) {
-    console.error(e);
+  componentWillUnmount() {
+    console.log('top level index unmounted');
+    // this.notificationListener;
+    // this.notificationOpenedListener;
+  }
+
+  render() {
+    StatusBar.setBarStyle('light-content', true);
+    return (
+      <Provider store={store}>
+        <PersistGate loading={<Rehydrating />} persistor={persistor}>
+          <Application />
+        </PersistGate>
+      </Provider>
+    );
   }
 }
 
-export async function googleLogin() {
-  try {
-    // add any configuration settings here:
-    await GoogleSignin.configure();
-
-    const data = await GoogleSignin.signIn();
-
-    // create a new firebase credential with the token
-    const credential = firebase.auth.GoogleAuthProvider.credential(data.idToken, data.accessToken)
-    // login with credential
-    const firebaseUserCredential = await firebase.auth().signInWithCredential(credential);
-
-    console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()));
-  } catch (e) {
-    console.error(e);
-  }
-}
-
-const App = () => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text onPress={facebookLogin}>fb</Text>
-      <Text onPress={googleLogin}>gg</Text>
-    </SafeAreaView>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: Colors.blue_light,
-    height: '100%'
-  },
-});
-
-export default App;
+AppRegistry.registerComponent(appName, () => FastingApp);
+AppRegistry.registerHeadlessTask('RNFirebaseBackgroundMessage', () => bgMessaging);

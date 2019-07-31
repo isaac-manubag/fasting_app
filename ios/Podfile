@@ -34,6 +34,8 @@ target 'fasting_app' do
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
 
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
   target 'fasting_appTests' do
     inherit! :search_paths
     # Pods for testing

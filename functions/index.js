@@ -31,11 +31,11 @@ module.exports = {
     .document(`fasts/{fastId}`)
     .onCreate((snapshot, context) => {
       console.log(context.params);
-      console.log(context.params.id);
+      console.log(context.auth.uid);
       // i just want to update the 'hasActiveFast' field on user doc
       return db
         .collection('users')
-        .doc(functions.auth.user().uid)
+        .doc(context.auth.uid)
         .update({ hasActiveFast: true });
     }),
 };

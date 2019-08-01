@@ -10,22 +10,32 @@ const db = admin.firestore();
  *
  * @param {Object} userRecord Contains the auth, uid and displayName info.
  */
-const createProfile = (userRecord) => {
-
+const createProfile = userRecord => {
   return db
     .collection('users')
     .doc(userRecord.uid)
-    .set({ 
+    .set({
       email: userRecord.email,
       displayName: userRecord.displayName,
       uid: userRecord.uid,
       photoURL: userRecord.photoURL,
       provider: userRecord.providerData[0].providerId,
-      hasActiveFast: false
+      hasActiveFast: false,
     })
     .catch(console.error);
 };
 
 module.exports = {
   authOnCreate: functions.auth.user().onCreate(createProfile),
+  fastsOnCreate: functions.firestore
+    .document(`fasts/{fastId}`)
+    .onCreate((snapshot, context) => {
+      console.log(context.params);
+      console.log(context.params.id);
+      // i just want to update the 'hasActiveFast' field on user doc
+      return db
+        .collection('users')
+        .doc(functions.auth.user().uid)
+        .update({ hasActiveFast: true });
+    }),
 };

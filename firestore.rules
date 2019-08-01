@@ -1,10 +1,11 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /test/{test} {
+    match /fasts/{fast} {
       
       function signedInAndNoActiveTimer() {
-        return request.auth != null && resource.data.completed == true;
+        return request.auth != null && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.hasActiveFast == false;
       }
       
       function signedInAndOwner() {

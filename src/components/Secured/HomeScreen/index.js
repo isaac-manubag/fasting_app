@@ -17,7 +17,7 @@ class HomeScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    this.firestoreRef = firebase.firestore().collection('test');
+    this.firestoreRef = firebase.firestore().collection('fasts');
     this.firebaseUser = firebase.auth().currentUser;
   }
 

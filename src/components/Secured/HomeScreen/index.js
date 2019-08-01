@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Text } from 'react-native';
 import { Button } from 'react-native-elements';
+import firebase from 'react-native-firebase';
 import { SafeAreaView } from 'react-navigation';
+import moment from 'moment';
 import { logout } from '../../../redux/actions/auth';
  
 
@@ -13,11 +15,26 @@ class HomeScreen extends React.Component {
     user: PropTypes.object,
   };
 
+  constructor(props) {
+    super(props);
+    this.firestoreRef = firebase.firestore().collection('test');
+    this.firebaseUser = firebase.auth().currentUser;
+  }
+
   render() {
     return (
       <SafeAreaView forceInset={{ bottom: 'never' }}>
         <Text>Home Screen</Text>
         <Button onPress={this.props.logout} title="out" />
+        <Button onPress={() => {
+          this.firestoreRef.add({
+            title: 'sac test 1',
+            start: moment().unix(),
+            end: moment().add(1, 'days').unix(),
+            completed: false,
+            user: this.firebaseUser.uid
+          });
+        }} title="test" />
       </SafeAreaView>
     );
   }

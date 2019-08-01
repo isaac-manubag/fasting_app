@@ -14,4 +14,6 @@
 - Social Auth
 - Firebase Auth
 - Firebase Cloud Messaging
+- Firebase Firestore
+- Firebase Firestore Rules
 - Local Storage

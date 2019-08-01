@@ -1,0 +1,20 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /test/{test} {
+      
+      function signedInAndNoActiveTimer() {
+        return request.auth != null && resource.data.completed == true;
+      }
+      
+      function signedInAndOwner() {
+       	return request.auth != null && resource.data.user == request.auth.uid;
+      }
+      
+      allow read: if signedInAndOwner();
+      allow write: if signedInAndNoActiveTimer();
+      allow update: if signedInAndOwner();
+      allow delete: if signedInAndOwner();
+    }
+  }
+}

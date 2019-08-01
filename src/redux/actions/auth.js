@@ -1,9 +1,13 @@
 import constants from "../../utils/constants";
 
-export const loggedIn = () => ({
-  type: constants.auth.LOGIN_SUCCESS
+export const fbLogin = () => ({
+  type: constants.auth.LOGIN_REQUEST_FB
+});
+
+export const googleLogin = () => ({
+  type: constants.auth.LOGIN_REQUEST_GG
 });
 
 export const logout = () => ({
-  type: constants.auth.LOGGED_OUT
+  type: constants.auth.LOGOUT
 });

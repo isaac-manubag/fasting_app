@@ -2,8 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { SafeAreaView, Text } from 'react-native';
-import { login } from '../../../redux/actions/auth';
+import { SafeAreaView } from 'react-native';
+import { Button } from 'react-native-elements';
+import { fbLogin, googleLogin } from '../../../redux/actions/auth';
 
 class Login extends React.Component {
   static navigationOptions = {
@@ -12,18 +13,19 @@ class Login extends React.Component {
 
   static propTypes = {
     navigation: PropTypes.object,
-    login: PropTypes.func,
+    fbLogin: PropTypes.func,
+    googleLogin: PropTypes.func,
   };
 
   constructor(props) {
     super(props);
-
   }
 
   render() {
     return (
       <SafeAreaView>
-        <Text>Login</Text>
+        <Button title='fb' onPress={this.props.fbLogin}/>
+        <Button title='gg' onPress={this.props.googleLogin}/>
       </SafeAreaView>
     );
   }
@@ -34,7 +36,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  login,
+  fbLogin,
+  googleLogin,
 };
 
 export default connect(

@@ -8,17 +8,6 @@ class StatisticsMonthScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: `Test`,
-      headerRight: (
-        <Icon
-          name="home"
-          type="font-awesome"
-          color="#fff"
-          onPress={() => navigation.navigate('HOME')}
-          containerStyle={{
-            paddingRight: 20,
-          }}
-        />
-      ),
     };
   };
 

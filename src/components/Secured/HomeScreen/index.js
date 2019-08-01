@@ -13,15 +13,11 @@ class HomeScreen extends React.Component {
     user: PropTypes.object,
   };
 
-  logout() {
-    this.props.logout();
-  }
-
   render() {
     return (
       <SafeAreaView forceInset={{ bottom: 'never' }}>
         <Text>Home Screen</Text>
-        <Button onPress={logout}>Out</Button>
+        <Button onPress={this.props.logout} title="out" />
       </SafeAreaView>
     );
   }
@@ -29,7 +25,6 @@ class HomeScreen extends React.Component {
 
 const mapStateToProps = state => ({
   isLoggedIn: state.auth.isLoggedIn,
-  user: state.userProfile.user,
 });
 
 const mapDispatchToProps = {

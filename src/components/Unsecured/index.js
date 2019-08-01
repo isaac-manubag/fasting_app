@@ -5,7 +5,7 @@ const routeConfig = {
   Login: {
     screen: LoginScreen,
   },
-  initialRouteName: 'Main',
+  initialRouteName: 'Login',
   headerMode: 'none',
 };
 

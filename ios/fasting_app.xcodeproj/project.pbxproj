@@ -16,6 +16,7 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2D3BAB8D22EFEDE90058B2BD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D3BAB8C22EFEDE90058B2BD /* GoogleService-Info.plist */; };
+		2D3BAB8F22F271C80058B2BD /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 2D3BAB8E22F271C80058B2BD /* Fonts */; };
 		2DCD954D1E0B4F2C00145EB5 /* fasting_appTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* fasting_appTests.m */; };
 		62A6FB405DA6DFF9F14F6004 /* libPods-fasting_app-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA722D509F182257A89C8D7 /* libPods-fasting_app-tvOSTests.a */; };
 		ADD2F51CCBA799AB969B9483 /* libPods-fasting_appTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D4082BBA2102348D2F1D4F9 /* libPods-fasting_appTests.a */; };
@@ -56,6 +57,7 @@
 		2D02E47B1E0B4A5D006451C7 /* fasting_app-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fasting_app-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* fasting_app-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "fasting_app-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D3BAB8C22EFEDE90058B2BD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2D3BAB8E22F271C80058B2BD /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = "../node_modules/react-native-vector-icons/Fonts"; sourceTree = "<group>"; };
 		2D4082BBA2102348D2F1D4F9 /* libPods-fasting_appTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fasting_appTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A17E1F9B98C14C3B3A59B30 /* Pods-fasting_app-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fasting_app-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-fasting_app-tvOSTests/Pods-fasting_app-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		5EBF7B31085B5453A6C0C9EC /* Pods-fasting_appTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fasting_appTests.debug.xcconfig"; path = "Target Support Files/Pods-fasting_appTests/Pods-fasting_appTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				2D3BAB8E22F271C80058B2BD /* Fonts */,
 				13B07FAE1A68108700A75B9A /* fasting_app */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* fasting_appTests */,
@@ -340,6 +343,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D3BAB8F22F271C80058B2BD /* Fonts in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				2D3BAB8D22EFEDE90058B2BD /* GoogleService-Info.plist in Resources */,

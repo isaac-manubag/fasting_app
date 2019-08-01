@@ -2,7 +2,6 @@ import React from 'react';
 import { AppRegistry, StatusBar, AsyncStorage } from 'react-native';
 import firebase from 'react-native-firebase';
 import { Provider } from 'react-redux';
-import { Text } from 'react-native';
 import { PersistGate } from 'redux-persist/integration/react';
 import Store, { persistor } from './src/redux';
 import Application from './src/components/Application';
@@ -10,6 +9,9 @@ import Rehydrating from './src/components/Rehydrating';
 import { name as appName } from './app.json';
 import bgMessaging from './bgMessaging';
 import NavigationService from './NavigationService';
+import Icon from 'react-native-vector-icons/MaterialIcons'
+
+Icon.loadFont();
 
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-console */
@@ -115,8 +117,6 @@ export default class FastingApp extends React.Component {
 
   componentWillUnmount() {
     console.log('top level index unmounted');
-    // this.notificationListener;
-    // this.notificationOpenedListener;
   }
 
   render() {

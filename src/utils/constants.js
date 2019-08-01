@@ -11,6 +11,8 @@ export default {
   },
   auth: {
     LOGIN_REQUEST: `${auth} LOGIN_REQUEST`,
+    LOGIN_REQUEST_FB: `${auth} LOGIN_REQUEST_FB`,
+    LOGIN_REQUEST_GG: `${auth} LOGIN_REQUEST_GG`,
     LOGIN_SUCCESS: `${auth} LOGIN_SUCCESS`,
     LOGIN_ERROR: `${auth} LOGIN_ERROR`,
     LOGOUT: `${auth} LOGOUT`,

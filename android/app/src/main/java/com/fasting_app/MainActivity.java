@@ -1,4 +1,4 @@
-package com.fasting_app;
+package com.isaacmanubag.fastingapp;
 
 import com.facebook.react.ReactActivity;
 

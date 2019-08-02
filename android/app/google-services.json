@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1050830759732",
+    "firebase_url": "https://fasting-app-eeef9.firebaseio.com",
+    "project_id": "fasting-app-eeef9",
+    "storage_bucket": "fasting-app-eeef9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1050830759732:android:8280829d8d62f803",
+        "android_client_info": {
+          "package_name": "com.isaacmanubag.fastingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1050830759732-h1jvv8c1fnv1fnjqaictr6e10i2i7iea.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtT-wGYEPGcFCFSB6pCwSn8oyWV4uEw2E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1050830759732-h1jvv8c1fnv1fnjqaictr6e10i2i7iea.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1050830759732-tk420v2utflel0ab7ug1gcdne0p3n5tt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.isaacmanubag.fastingapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

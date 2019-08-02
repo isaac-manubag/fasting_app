@@ -26,6 +26,20 @@ class HomeScreen extends React.Component {
     }
   }
 
+  tick() {
+    this.setState(prevState => ({
+      progress: prevState.progress + 1
+    }));
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(() => this.tick(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   render() {
     return (
       <SafeAreaView forceInset={{ bottom: 'never' }}>
@@ -50,7 +64,7 @@ class HomeScreen extends React.Component {
         size={300} 
         borderWidth={0} 
         thickness={20} 
-        showsText={true} 
+        showsText={false} 
         animated={true} 
         formatText={(progress) => <Text>Sac ${progress}</Text>} 
         strokeCap={'round'} 

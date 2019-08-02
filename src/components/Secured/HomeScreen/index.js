@@ -11,6 +11,28 @@ import * as Progress from 'react-native-progress';
  
 
 class HomeScreen extends React.Component {
+  /**
+   * on start fast
+   * 1.1 send start and end time to firebase
+   * 1.2 set firebase user's activeFastID to the ID of the created fast
+   * 1.3 get/receive the created fast record from firebase and use for local storage
+   * 2.1 store start and end time to local storage called activeFast with start, end, and id properties
+   */
+
+   /**
+   * on home screen mount
+   * 1.1 get local storage activeFast, if not present fetch users active fast from firebase
+   * 1.2 if both actions on 1.1 does not return a value, then show user start a fast message
+   * 1.3 if you get a value from 1.1, calculate things and show user the percentage done, remaining time, etc...
+   * 1.4 update the values every 30seconds
+   */
+
+   /**
+    * on end fast
+    * 1.1 send request to firebase
+    * 1.2 check if fast is completed or not on firestore functions
+    * 1.3 set firebase user activeFast to false
+    */
   static propTypes = {
     logout: PropTypes.func,
     user: PropTypes.object,

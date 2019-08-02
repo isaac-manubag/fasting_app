@@ -2,7 +2,7 @@ import constants from '../../utils/constants';
 
 const defaultState = {
   authenticating: false,
-  isLoggedIn: true,
+  isLoggedIn: false,
 };
 
 export default function authReducer(state = defaultState, action) {

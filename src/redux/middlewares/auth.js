@@ -20,31 +20,36 @@ export const userLoginFlow = ({ dispatch }) => next => async action => {
         'public_profile',
         'email',
       ]);
+
       if (result.isCancelled) {
+        dispatch({
+          type: constants.auth.LOGIN_ERROR,
+        });
+
         return;
       }
+
       const data = await AccessToken.getCurrentAccessToken();
+
       if (!data) {
-        // handle this however suites the flow of your app
         throw new Error(
           'Something went wrong obtaining the users access token'
         );
       }
-      // create a new firebase credential with the token
+
       const credential = firebase.auth.FacebookAuthProvider.credential(
         data.accessToken
       );
-      // login with credential
-      const firebaseUserCredential = await firebase
-        .auth()
-        .signInWithCredential(credential);
 
-      console.log(JSON.stringify(firebaseUserCredential.user.toJSON()));
+      await firebase.auth().signInWithCredential(credential);
 
       dispatch({
         type: constants.auth.LOGIN_SUCCESS,
       });
     } catch (e) {
+      dispatch({
+        type: constants.auth.LOGIN_ERROR,
+      });
       throw e;
     }
   } else if (action.type === constants.auth.LOGIN_REQUEST_GG) {
@@ -56,27 +61,24 @@ export const userLoginFlow = ({ dispatch }) => next => async action => {
         },
       });
 
-      // add any configuration settings here:
       await GoogleSignin.configure();
 
       const data = await GoogleSignin.signIn();
 
-      // create a new firebase credential with the token
       const credential = firebase.auth.GoogleAuthProvider.credential(
         data.idToken,
         data.accessToken
       );
-      // login with credential
-      const firebaseUserCredential = await firebase
-        .auth()
-        .signInWithCredential(credential);
 
-      console.log(JSON.stringify(firebaseUserCredential.user.toJSON()));
+      await firebase.auth().signInWithCredential(credential);
 
       dispatch({
         type: constants.auth.LOGIN_SUCCESS,
       });
     } catch (e) {
+      dispatch({
+        type: constants.auth.LOGIN_ERROR,
+      });
       throw e;
     }
   }

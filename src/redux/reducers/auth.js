@@ -17,11 +17,19 @@ export default function authReducer(state = defaultState, action) {
       return {
         ...state,
         isLoggedIn: true,
+        authenticating: false,
       };
 
     case constants.auth.LOGOUT:
       return {
         ...state,
+        isLoggedIn: false,
+      };
+
+    case constants.auth.LOGIN_ERROR:
+      return {
+        ...state,
+        authenticating: false,
         isLoggedIn: false,
       };
 

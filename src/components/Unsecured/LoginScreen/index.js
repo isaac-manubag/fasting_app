@@ -2,9 +2,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { SafeAreaView } from 'react-native';
-import { Button } from 'react-native-elements';
+import {
+  View,
+  SafeAreaView,
+  ImageBackground,
+  ActivityIndicator,
+} from 'react-native';
+import { SocialIcon, Text } from 'react-native-elements';
 import { fbLogin, googleLogin } from '../../../redux/actions/auth';
+import styles from './styles';
 
 class Login extends React.Component {
   static navigationOptions = {
@@ -23,16 +29,43 @@ class Login extends React.Component {
 
   render() {
     return (
-      <SafeAreaView>
-        <Button title='fb' onPress={this.props.fbLogin}/>
-        <Button title='gg' onPress={this.props.googleLogin}/>
-      </SafeAreaView>
+      <ImageBackground
+        source={require('../../../assets/images/nutrition_bg.jpeg')}
+        style={styles.bgImage}
+      >
+        <SafeAreaView style={styles.sav}>
+          <Text h2 h2Style={styles.title}>
+            Fasting App
+          </Text>
+          {this.props.authenticating ? (
+            <View>
+              <ActivityIndicator size="large" />
+            </View>
+          ) : (
+            <React.Fragment>
+              <SocialIcon
+                title="Sign In With Facebook"
+                button
+                type="facebook"
+                onPress={this.props.fbLogin}
+              />
+              <SocialIcon
+                title="Sign In With Google"
+                button
+                type="google"
+                onPress={this.props.googleLogin}
+                style={styles.google}
+              />
+            </React.Fragment>
+          )}
+        </SafeAreaView>
+      </ImageBackground>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth,
+  authenticating: state.auth.authenticating,
 });
 
 const mapDispatchToProps = {
@@ -42,5 +75,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(Login);

@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { SafeAreaView, Text } from 'react-native';
-import {  Icon } from 'react-native-elements';
 
 class StatisticsMonthScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: `Test`,
+      title: 'Test',
     };
   };
 
@@ -17,7 +16,6 @@ class StatisticsMonthScreen extends React.Component {
 
   constructor(props) {
     super(props);
-
   }
 
   render() {
@@ -35,5 +33,5 @@ const mapDispatchToProps = null;
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(StatisticsMonthScreen);

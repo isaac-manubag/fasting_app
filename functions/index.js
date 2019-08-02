@@ -34,6 +34,6 @@ module.exports = {
       return db
         .collection('users')
         .doc(snapshot.data().user)
-        .update({ hasActiveFast: true });
+        .update({ activeFastID: context.params.fastId });
     }),
 };

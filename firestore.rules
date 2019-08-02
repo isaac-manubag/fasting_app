@@ -5,7 +5,7 @@ service cloud.firestore {
       
       function signedInAndNoActiveTimer() {
         return request.auth != null && 
-        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.hasActiveFast == false;
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.activeFastID == '';
       }
       
       function signedInAndOwner() {

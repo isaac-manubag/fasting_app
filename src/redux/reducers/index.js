@@ -1,8 +1,10 @@
-import { combineReducers } from "redux";
-import auth from "./auth";
+import { combineReducers } from 'redux';
+import auth from './auth';
+import fasts from './fasts';
 
 const rootReducer = combineReducers({
-  auth
+  auth,
+  fasts,
 });
 
 export default rootReducer;

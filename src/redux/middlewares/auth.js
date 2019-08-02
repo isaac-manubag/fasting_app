@@ -27,12 +27,12 @@ export const userLoginFlow = ({ dispatch }) => next => async action => {
       if (!data) {
         // handle this however suites the flow of your app
         throw new Error(
-          'Something went wrong obtaining the users access token',
+          'Something went wrong obtaining the users access token'
         );
       }
       // create a new firebase credential with the token
       const credential = firebase.auth.FacebookAuthProvider.credential(
-        data.accessToken,
+        data.accessToken
       );
       // login with credential
       const firebaseUserCredential = await firebase
@@ -64,7 +64,7 @@ export const userLoginFlow = ({ dispatch }) => next => async action => {
       // create a new firebase credential with the token
       const credential = firebase.auth.GoogleAuthProvider.credential(
         data.idToken,
-        data.accessToken,
+        data.accessToken
       );
       // login with credential
       const firebaseUserCredential = await firebase

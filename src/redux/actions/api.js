@@ -1,4 +1,4 @@
-import constants from "../../utils/constants";
+import constants from '../../utils/constants';
 
 export default (method, url, body, headers, onSuccess, onError, ...rest) => ({
   type: constants.app.API_REQUEST,
@@ -9,8 +9,8 @@ export default (method, url, body, headers, onSuccess, onError, ...rest) => ({
       url,
       headers,
       onSuccess,
-      onError
+      onError,
     },
     ...rest
-  )
+  ),
 });

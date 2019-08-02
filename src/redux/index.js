@@ -5,17 +5,17 @@ import rootReducer from './reducers';
 import apiMiddleware from './middlewares/api';
 import { authMiddleware } from './middlewares/auth';
 
-const composeEnhancers = compose; 
+const composeEnhancers = compose;
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth'],
+  whitelist: ['auth', 'fasts'],
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = createStore(
   persistedReducer,
-  composeEnhancers(applyMiddleware(...authMiddleware, apiMiddleware)),
+  composeEnhancers(applyMiddleware(...authMiddleware, apiMiddleware))
 );
 
 export const persistor = persistStore(store);

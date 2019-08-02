@@ -15,8 +15,8 @@ class HomeScreen extends React.Component {
    * on start fast
    * ✔✔✔ 1.1 send start and end time to firebase
    * ✔✔✔ 1.2 set firebase user's activeFastID to the ID of the created fast
-   * 1.3 get/receive the created fast record from firebase and use for local storage
-   * 2.1 store start and end time to local storage called activeFast with start, end, and id properties
+   * ✔✔✔ 1.3 get/receive the created fast record from firebase and use for local storage
+   * ✔✔✔ 2.1 store start and end time to local storage called activeFast with start, end, and id properties
    */
 
   /**

@@ -7,6 +7,7 @@ import firebase from 'react-native-firebase';
 import { SafeAreaView } from 'react-navigation';
 import moment from 'moment';
 import { logout } from '../../../redux/actions/auth';
+import * as Progress from 'react-native-progress';
  
 
 class HomeScreen extends React.Component {
@@ -19,6 +20,10 @@ class HomeScreen extends React.Component {
     super(props);
     this.firestoreRef = firebase.firestore().collection('fasts');
     this.firebaseUser = firebase.auth().currentUser;
+
+    this.state = {
+      progress: 10
+    }
   }
 
   render() {
@@ -35,6 +40,21 @@ class HomeScreen extends React.Component {
             user: this.firebaseUser.uid
           });
         }} title="test" />
+        <Button onPress={() => {
+          this.setState({
+            progress: this.state.progress + 10
+          })
+        }} title="grow" />
+      <Progress.Circle 
+        progress={this.state.progress / 100} 
+        size={300} 
+        borderWidth={0} 
+        thickness={20} 
+        showsText={true} 
+        animated={true} 
+        formatText={(progress) => <Text>Sac ${progress}</Text>} 
+        strokeCap={'round'} 
+      />
       </SafeAreaView>
     );
   }

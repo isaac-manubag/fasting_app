@@ -5,6 +5,7 @@ target 'fasting_app' do
   # Pods for fasting_app
   pod 'Firebase/Core'
   pod 'React', :path => '../node_modules/react-native/'
+  pod 'React-ART', :path => '../node_modules/react-native/Libraries/ART'
   pod 'React-Core', :path => '../node_modules/react-native/React'
   pod 'React-DevSupport', :path => '../node_modules/react-native/React'
   pod 'React-fishhook', :path => '../node_modules/react-native/Libraries/fishhook'

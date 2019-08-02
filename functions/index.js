@@ -30,12 +30,10 @@ module.exports = {
   fastsOnCreate: functions.firestore
     .document(`fasts/{fastId}`)
     .onCreate((snapshot, context) => {
-      console.log(context.params);
-      console.log(context.auth.uid);
       // i just want to update the 'hasActiveFast' field on user doc
       return db
         .collection('users')
-        .doc(context.auth.uid)
+        .doc(snapshot.data().user)
         .update({ hasActiveFast: true });
     }),
 };

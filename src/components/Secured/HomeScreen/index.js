@@ -28,7 +28,7 @@ class HomeScreen extends React.Component {
         <Button onPress={this.props.logout} title="out" />
         <Button onPress={() => {
           this.firestoreRef.add({
-            title: 'sac test 1',
+            title: Date(),
             start: moment().unix(),
             end: moment().add(1, 'days').unix(),
             completed: false,

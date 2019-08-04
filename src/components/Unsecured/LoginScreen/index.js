@@ -5,10 +5,11 @@ import { connect } from 'react-redux';
 import {
   View,
   SafeAreaView,
-  ImageBackground,
   ActivityIndicator,
+  Text,
+  Image,
 } from 'react-native';
-import { SocialIcon, Text } from 'react-native-elements';
+import { SocialIcon } from 'react-native-elements';
 import { fbLogin, googleLogin } from '../../../redux/actions/auth';
 import styles from './styles';
 
@@ -29,37 +30,39 @@ class Login extends React.Component {
 
   render() {
     return (
-      <ImageBackground
-        source={require('../../../assets/images/nutrition_bg.jpeg')}
-        style={styles.bgImage}
-      >
-        <SafeAreaView style={styles.sav}>
-          <Text h2 h2Style={styles.title}>
-            Fasting App
-          </Text>
-          {this.props.authenticating ? (
-            <View>
-              <ActivityIndicator size="large" />
-            </View>
-          ) : (
-            <React.Fragment>
-              <SocialIcon
-                title="Sign In With Facebook"
-                button
-                type="facebook"
-                onPress={this.props.fbLogin}
-              />
-              <SocialIcon
-                title="Sign In With Google"
-                button
-                type="google"
-                onPress={this.props.googleLogin}
-                style={styles.google}
-              />
-            </React.Fragment>
-          )}
-        </SafeAreaView>
-      </ImageBackground>
+      <SafeAreaView style={styles.sav}>
+        <Image
+          source={require('../../../assets/images/app-logo.png')}
+          style={styles.appLogo}
+        />
+        <Text style={styles.title}>Sigin to your account</Text>
+        <Text style={styles.paragraph}>
+          Automatically sync your fasting history to the cloud, sleect form a
+          range of fasts, view stats and save your progress.
+        </Text>
+
+        {this.props.authenticating ? (
+          <View>
+            <ActivityIndicator size="large" />
+          </View>
+        ) : (
+          <React.Fragment>
+            <SocialIcon
+              title="Sign In With Facebook"
+              button
+              type="facebook"
+              onPress={this.props.fbLogin}
+            />
+            <SocialIcon
+              title="Sign In With Google"
+              button
+              type="google"
+              onPress={this.props.googleLogin}
+              style={styles.google}
+            />
+          </React.Fragment>
+        )}
+      </SafeAreaView>
     );
   }
 }

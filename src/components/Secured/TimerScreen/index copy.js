@@ -10,7 +10,7 @@ import { logout } from '../../../redux/actions/auth';
 import { setActiveFast } from '../../../redux/actions/fasts';
 import * as Progress from 'react-native-progress';
 
-class HomeScreen extends React.Component {
+class TimerScreen extends React.Component {
   /**
    * on start fast
    * ✔✔✔ send start and end time to firebase
@@ -80,7 +80,7 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <SafeAreaView forceInset={{ bottom: 'never' }}>
-        <Text>Home Screen</Text>
+        <Text>Timer Screen</Text>
         <Text>${JSON.stringify(this.props.activeFast)}</Text>
         <Button onPress={this.props.logout} title="out" />
         <Button
@@ -119,7 +119,7 @@ class HomeScreen extends React.Component {
           size={300}
           borderWidth={0}
           thickness={20}
-          showsText={false}
+          showsText={true}
           animated={true}
           formatText={progress => <Text>Sac ${progress}</Text>}
           strokeCap={'round'}
@@ -141,4 +141,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(HomeScreen);
+)(TimerScreen);

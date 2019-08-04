@@ -1,24 +1,36 @@
-import { createAppContainer, createMaterialTopTabNavigator } from 'react-navigation';
-import HomeScreen from './HomeScreen';
-import StatisticsNavigator from './Statistics/StatisticsNavigator';
+import {
+  createAppContainer,
+  createMaterialTopTabNavigator,
+} from 'react-navigation';
+import TimerScreen from './TimerScreen';
+import FastsScreen from './FastsScreen';
+import HistoryScreen from './HistoryScreen';
+import ProfileScreen from './ProfileScreen';
 
 const RouteConfigs = {
-  HOME: {
-    screen: HomeScreen,
+  TIMER: {
+    screen: TimerScreen,
   },
-  STATISTICS: {
-    screen: StatisticsNavigator,
+  FASTS: {
+    screen: FastsScreen,
+  },
+  HISTORY: {
+    screen: HistoryScreen,
+  },
+  PROFILE: {
+    screen: ProfileScreen,
   },
 };
 
-/* eslint-disable */
 const BottomTabNavigatorConfig = {
   swipeEnabled: true,
   tabBarPosition: 'bottom',
-  initialRouteName: 'HOME',
+  initialRouteName: 'TIMER',
 };
-/* eslint-enable */
 
-const TabNavigatorMaterial = createMaterialTopTabNavigator(RouteConfigs, BottomTabNavigatorConfig);
+const TabNavigatorMaterial = createMaterialTopTabNavigator(
+  RouteConfigs,
+  BottomTabNavigatorConfig
+);
 
 export default createAppContainer(TabNavigatorMaterial);

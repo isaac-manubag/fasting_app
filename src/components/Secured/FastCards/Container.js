@@ -1,17 +1,20 @@
 import React from 'react';
-import { View } from 'react-native';
+import PropTypes from 'prop-types';
+import { TouchableOpacity } from 'react-native';
 import styles from './styles';
 
 class Container extends React.Component {
+  static propTypes = {
+    onPress: PropTypes.func,
+  };
 
   render() {
     return (
-      <View style={styles.container}>
+      <TouchableOpacity style={styles.container} onPress={this.props.onPress}>
         {this.props.children}
-      </View>
+      </TouchableOpacity>
     );
   }
 }
-
 
 export default Container;

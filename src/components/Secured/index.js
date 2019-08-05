@@ -24,7 +24,7 @@ const RouteConfigs = {
 };
 
 const BottomTabNavigatorConfig = {
-  swipeEnabled: true,
+  swipeEnabled: false,
   tabBarPosition: 'bottom',
   lazy: true,
   initialRouteName: 'Timer',

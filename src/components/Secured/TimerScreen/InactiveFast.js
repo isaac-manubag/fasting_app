@@ -5,7 +5,10 @@ import { Text, Alert } from 'react-native';
 import { Icon, Button } from 'react-native-elements';
 import { SafeAreaView, withNavigation } from 'react-navigation';
 import Carousel from 'react-native-snap-carousel';
+import firebase from 'react-native-firebase';
+import moment from 'moment';
 import FastCards from '../FastCards';
+import { setActiveFast } from '../../../redux/actions/fasts';
 import styles, { sliderWidth, itemWidth } from './styles';
 import Colors from '../../../utils/colors';
 import fastItems from '../../../utils/fasts';
@@ -19,8 +22,33 @@ class InactiveFast extends React.Component {
   constructor(props) {
     super(props);
 
+    this.firestoreRef = firebase.firestore().collection('fasts');
+    this.firebaseUser = firebase.auth().currentUser;
+
     this._promptUser = this._promptUser.bind(this);
     this._renderItem = this._renderItem.bind(this);
+    this._startFast = this._startFast.bind(this);
+  }
+
+  _startFast(item) {
+    const start = moment().unix();
+    const end = moment()
+      .add(item.time_to_fast, 'hours')
+      .unix();
+    this.firestoreRef
+      .add({
+        title: item.title,
+        start,
+        end,
+        completed: false,
+        user: this.firebaseUser.uid,
+      })
+      .then(fast => {
+        this.props.setActiveFast(fast.id, start, end);
+      })
+      .catch(error => {
+        console.log('fast add err: ', error);
+      });
   }
 
   _promptUser(item) {
@@ -34,7 +62,7 @@ class InactiveFast extends React.Component {
         },
         {
           text: 'Start Fasting',
-          onPress: () => console.log('OK Pressed'),
+          onPress: () => this._startFast(item),
         },
       ],
       { cancelable: false }
@@ -86,7 +114,9 @@ class InactiveFast extends React.Component {
 
 const mapStateToProps = null;
 
-const mapDispatchToProps = null;
+const mapDispatchToProps = {
+  setActiveFast,
+};
 
 export default connect(
   mapStateToProps,

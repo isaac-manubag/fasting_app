@@ -21,8 +21,8 @@ class InactiveFast extends React.Component {
     return (
       <SafeAreaView style={styles.sav}>
         <Text style={styles.header}>You are not fasting</Text>
-        <Icon name='exclamation-triangle' type='font-awesome' color={Colors.light_text2} />
-        <Text>
+        <Icon iconStyle={styles.warnIcon} name='exclamation-triangle' type='font-awesome' color={Colors.light_text2} />
+        <Text style={styles.paragraph}>
           Choose a fast from the Quick picker below or tap the button to read
           abouth our fasts
         </Text>

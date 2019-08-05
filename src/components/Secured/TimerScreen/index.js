@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Icon, Button } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import { setActiveFast } from '../../../redux/actions/fasts';
-import styles from './styles';
 import Colors from '../../../utils/colors';
 import ActiveFast from './ActiveFast';
 import InactiveFast from './InactiveFast';
@@ -16,7 +15,7 @@ class TimerScreen extends React.Component {
   });
 
   static propTypes = {
-    activeFast: PropTypes.bool,
+    activeFast: PropTypes.object,
   };
 
   constructor(props) {

@@ -1,23 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Text } from 'react-native';
-import { Icon } from 'react-native-elements';
-import { SafeAreaView } from 'react-navigation';
-import { logout } from '../../../redux/actions/auth';
+import { Icon, Button } from 'react-native-elements';
 import { setActiveFast } from '../../../redux/actions/fasts';
 import styles from './styles';
 import Colors from '../../../utils/colors';
+import ActiveFast from './ActiveFast';
+import InactiveFast from './InactiveFast';
 
 class TimerScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     tabBarIcon: (
-      <Icon name="clock-o" type="font-awesome" color={Colors.light_text2} />
+      <Icon name='clock-o' type='font-awesome' color={Colors.light_text2} />
     ),
   });
 
   static propTypes = {
-    user: PropTypes.object,
+    activeFast: PropTypes.bool,
   };
 
   constructor(props) {
@@ -25,11 +24,7 @@ class TimerScreen extends React.Component {
   }
 
   render() {
-    return (
-      <SafeAreaView style={styles.sav}>
-        <Text>timer</Text>
-      </SafeAreaView>
-    );
+    return this.props.activeFast.id ? <ActiveFast /> : <InactiveFast />;
   }
 }
 
@@ -38,11 +33,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  logout,
   setActiveFast,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(TimerScreen);

@@ -38,9 +38,6 @@ const BottomTabNavigatorConfig = {
       margin: 0,
     },
     renderIndicator: () => false,
-    tabStyle: {
-      width: 100,
-    },
     style: {
       backgroundColor: Colors.dark_bg2,
     },

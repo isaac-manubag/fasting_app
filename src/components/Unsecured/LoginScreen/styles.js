@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import Colors from '../../../utils/colors';
+import Fonts from '../../../utils/fonts';
 
 export default StyleSheet.create({
   bgImage: { width: '100%', height: '100%' },
@@ -9,7 +10,7 @@ export default StyleSheet.create({
   title: {
     textAlign: 'center',
     paddingVertical: 24,
-    fontFamily: 'Interstate Bold',
+    fontFamily: Fonts.interstate_bold,
     fontSize: 30,
     color: Colors.light_text2,
   },

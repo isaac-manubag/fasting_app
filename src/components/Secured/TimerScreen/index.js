@@ -10,7 +10,7 @@ import InactiveFast from './InactiveFast';
 class TimerScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     tabBarIcon: (
-      <Icon name='clock-o' type='font-awesome' color={Colors.light_text2} />
+      <Icon name="clock-o" type="font-awesome" color={Colors.light_text2} />
     ),
   });
 
@@ -37,5 +37,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(TimerScreen);

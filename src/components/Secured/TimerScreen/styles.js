@@ -1,7 +1,21 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import colors from '../../../utils/colors';
 import fonts from '../../../utils/fonts';
 import globalStyles from '../../../utils/globalStyles';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+
+const { width: viewportWidth } = Dimensions.get('window');
+
+function wp (percentage) {
+  const value = (percentage * viewportWidth) / 100;
+  return Math.round(value);
+}
+
+const slideWidth = wp(75);
+const itemHorizontalMargin = wp(2);
+
+export const sliderWidth = viewportWidth;
+export const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
 export default StyleSheet.create({
   sav: {
@@ -21,6 +35,19 @@ export default StyleSheet.create({
   },
   paragraph: {
     ...globalStyles.paragraph,
-    paddingVertical: 40
+    paddingTop: 40,
+    paddingBottom: 20,
+  },
+  btn: {
+    backgroundColor: colors.dark_bg2,
+    width: 200,
+    alignSelf: 'center',
+    borderWidth: 0.5,
+    borderColor: colors.light_text1,
+    borderRadius: 20,
+    marginBottom: 40
+  },
+  btnTitle: {
+    color: colors.light_text2
   }
 });

@@ -21,6 +21,7 @@ export default StyleSheet.create({
   sav: {
     height: '100%',
     backgroundColor: colors.dark_bg,
+    alignContent: 'center'
   },
   header: {
     color: colors.light_text2,

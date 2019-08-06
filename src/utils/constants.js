@@ -20,6 +20,8 @@ export default {
     TOGGLE_AUTHENTICATING: `${auth} TOGGLE_AUTHENTICATING`,
   },
   fast: {
+    START_FAST: `${fast} START_FAST`,
     SET_ACTIVE_FAST: `${fast} SET_ACTIVE_FAST`,
+    REMOVE_ACTIVE_FAST: `${fast} REMOVE_ACTIVE_FAST`,
   },
 };

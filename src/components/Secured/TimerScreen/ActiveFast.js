@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Text } from 'react-native';
-import { Icon, Button } from 'react-native-elements';
+import { Text, TouchableOpacity } from 'react-native';
+import { Icon } from 'react-native-elements';
 import { SafeAreaView } from 'react-navigation';
 import * as Progress from 'react-native-progress';
 import moment from 'moment';
-import { setActiveFast } from '../../../redux/actions/fasts';
+import { removeActiveFast } from '../../../redux/actions/fasts';
 import styles from './styles';
 import Colors from '../../../utils/colors';
 
 class ActiveFast extends React.Component {
   static propTypes = {
     user: PropTypes.object,
-    setActiveFast: PropTypes.func,
+    removeActiveFast: PropTypes.func,
   };
 
   constructor(props) {
@@ -34,7 +34,7 @@ class ActiveFast extends React.Component {
   }
 
   _getProgress() {
-    const {end, start} = this.props.activeFast;
+    const { end, start } = this.props.activeFast;
     const elapsed_time = this.state.now - start;
     return elapsed_time / (end - start);
   }
@@ -50,9 +50,19 @@ class ActiveFast extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.sav}>
-        <Text>You are FASTING</Text>
-        <Button title="end fast" onPress={() => this.props.setActiveFast(null, null, null)}/>
+        <Text style={styles.header}>You are fasting!</Text>
+        <TouchableOpacity style={styles.btn}>
+          <Text style={styles.fastName}>{this.props.activeFast.title}</Text>
+          <Icon
+            iconStyle={styles.editIcon}
+            name="edit"
+            type="font-awesome"
+            color={Colors.light_text2}
+          />
+        </TouchableOpacity>
+
         <Progress.Circle
+          style={styles.progressCircle}
           progress={this._getProgress()}
           size={300}
           borderWidth={0}
@@ -60,7 +70,16 @@ class ActiveFast extends React.Component {
           showsText={true}
           animated={true}
           strokeCap={'round'}
+          color={Colors.light_text2}
+          unfilledColor={Colors.contrast1}
         />
+
+        <TouchableOpacity
+          style={styles.endFastBtn}
+          onPress={() => this.props.removeActiveFast()}
+        >
+          <Text style={styles.endFastTitle}>End Fast</Text>
+        </TouchableOpacity>
       </SafeAreaView>
     );
   }
@@ -71,10 +90,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setActiveFast,
+  removeActiveFast,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(ActiveFast);

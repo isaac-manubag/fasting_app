@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import rootReducer from './reducers';
 import apiMiddleware from './middlewares/api';
 import { authMiddleware } from './middlewares/auth';
+import { fastsMiddleware } from './middlewares/fasts';
 
 const composeEnhancers = compose;
 const persistConfig = {
@@ -15,7 +16,9 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = createStore(
   persistedReducer,
-  composeEnhancers(applyMiddleware(...authMiddleware, apiMiddleware))
+  composeEnhancers(
+    applyMiddleware(...authMiddleware, ...fastsMiddleware, apiMiddleware)
+  )
 );
 
 export const persistor = persistStore(store);

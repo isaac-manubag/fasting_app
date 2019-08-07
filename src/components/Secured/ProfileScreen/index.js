@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Text } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { Icon, Button } from 'react-native-elements';
 import { SafeAreaView } from 'react-navigation';
 import { logout } from '../../../redux/actions/auth';
 import { setActiveFast } from '../../../redux/actions/fasts';
@@ -12,7 +12,7 @@ import Colors from '../../../utils/colors';
 class ProfileScree extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     tabBarIcon: (
-      <Icon name="user" type="font-awesome" color={Colors.light_text2} />
+      <Icon name='user' type='font-awesome' color={Colors.light_text2} />
     ),
   });
 
@@ -27,7 +27,8 @@ class ProfileScree extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.sav}>
-        <Text>ProfileScree</Text>
+        <Text>ProfileScreen</Text>
+        <Button title='logout' onPress={() => this.props.logout()} />
       </SafeAreaView>
     );
   }
@@ -44,5 +45,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(ProfileScree);

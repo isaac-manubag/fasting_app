@@ -6,7 +6,6 @@ import { setActiveFast, removeActiveFast } from '../actions/fasts';
 import { logout } from '../actions/auth';
 
 const firestoreRef = firebase.firestore().collection('fasts');
-const firebaseUser = firebase.auth().currentUser;
 
 export const userFastingFlow = ({ dispatch }) => next => async action => {
   next(action);
@@ -25,7 +24,7 @@ export const userFastingFlow = ({ dispatch }) => next => async action => {
           start,
           end,
           completed: false,
-          user: firebaseUser.uid,
+          user: firebase.auth().currentUser.uid,
         })
         .then(fast => {
           dispatch(setActiveFast(fast.id, item.title, start, end));

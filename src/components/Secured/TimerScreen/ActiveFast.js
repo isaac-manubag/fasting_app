@@ -5,6 +5,7 @@ import { Text, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { SafeAreaView } from 'react-navigation';
 import * as Progress from 'react-native-progress';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import moment from 'moment';
 import { removeActiveFast } from '../../../redux/actions/fasts';
 import styles from './styles';
@@ -55,13 +56,13 @@ class ActiveFast extends React.Component {
           <Text style={styles.fastName}>{this.props.activeFast.title}</Text>
           <Icon
             iconStyle={styles.editIcon}
-            name="edit"
-            type="font-awesome"
+            name='edit'
+            type='font-awesome'
             color={Colors.light_text2}
           />
         </TouchableOpacity>
 
-        <Progress.Circle
+        {/* <Progress.Circle
           style={styles.progressCircle}
           progress={this._getProgress()}
           size={300}
@@ -72,7 +73,17 @@ class ActiveFast extends React.Component {
           strokeCap={'round'}
           color={Colors.light_text2}
           unfilledColor={Colors.contrast1}
-        />
+        /> */}
+
+        <AnimatedCircularProgress
+          size={200}
+          width={3}
+          fill={this.state.fill}
+          tintColor='#00e0ff'
+          backgroundColor='#3d5875'
+        >
+          {fill => <Text>sac</Text>}
+        </AnimatedCircularProgress>
 
         <TouchableOpacity
           style={styles.endFastBtn}
@@ -95,5 +106,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(ActiveFast);

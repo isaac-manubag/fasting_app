@@ -3,11 +3,12 @@ import firebase from 'react-native-firebase';
 import moment from 'moment';
 import constants from '../../utils/constants';
 import { setActiveFast, removeActiveFast } from '../actions/fasts';
+import { logout } from '../actions/auth';
 
 const firestoreRef = firebase.firestore().collection('fasts');
 const firebaseUser = firebase.auth().currentUser;
 
-export const userLoginFlow = ({ dispatch }) => next => async action => {
+export const userFastingFlow = ({ dispatch }) => next => async action => {
   next(action);
 
   if (action.type === constants.fast.START_FAST) {
@@ -34,9 +35,15 @@ export const userLoginFlow = ({ dispatch }) => next => async action => {
         });
     } catch (e) {
       dispatch(removeActiveFast());
+
+      if(e.message === "Cannot read property 'uid' of null") {
+        console.log('sac');
+        dispatch(logout());
+      }
+
       throw e;
     }
   }
 };
 
-export const fastsMiddleware = [userLoginFlow];
+export const fastsMiddleware = [userFastingFlow];

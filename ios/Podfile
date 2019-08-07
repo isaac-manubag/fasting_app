@@ -40,6 +40,8 @@ target 'fasting_app' do
 
   pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
 
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
   target 'fasting_appTests' do
     inherit! :search_paths
     # Pods for testing

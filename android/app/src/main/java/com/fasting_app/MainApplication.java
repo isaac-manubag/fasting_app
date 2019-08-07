@@ -16,6 +16,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
 import io.invertase.firebase.auth.RNFirebaseAuthPackage;
+import com.horcrux.svg.SvgPackage;
 
 import java.util.List;
 

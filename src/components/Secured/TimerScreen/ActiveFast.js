@@ -26,6 +26,7 @@ class ActiveFast extends React.Component {
     this._getProgress = this._getProgress.bind(this);
     this._tick = this._tick.bind(this);
     this._getFormattedTime = this._getFormattedTime.bind(this);
+    this.pad = this.pad.bind(this);
   }
 
   pad(num, size) {

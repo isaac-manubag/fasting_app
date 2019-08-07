@@ -15,7 +15,8 @@ export const userFastingFlow = ({ dispatch }) => next => async action => {
       const { item } = action.payload;
       const start = moment().unix();
       const end = moment()
-        .add(item.time_to_fast, 'hours')
+        // .add(item.time_to_fast, 'hours')
+        .add(30, 'minutes')
         .unix();
 
       firestoreRef

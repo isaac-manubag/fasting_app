@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import { Text, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { SafeAreaView } from 'react-navigation';
-import * as Progress from 'react-native-progress';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import moment from 'moment';
+import moment, { min } from 'moment';
 import { removeActiveFast } from '../../../redux/actions/fasts';
 import styles from './styles';
 import Colors from '../../../utils/colors';
@@ -26,6 +25,39 @@ class ActiveFast extends React.Component {
 
     this._getProgress = this._getProgress.bind(this);
     this._tick = this._tick.bind(this);
+    this._getRemainingFormattedTime = this._getRemainingFormattedTime.bind(
+      this,
+    );
+    this._getFormattedTime = this._getFormattedTime.bind(this);
+  }
+
+  pad(num, size) {
+    let s = num + '';
+    while (s.length < size) s = '0' + s;
+    return s;
+  }
+
+  _getFormattedTime(type) {
+    const { start, end } = this.props.activeFast;
+    let delta;
+    
+    if (type === 'remaining') {
+      delta = end - this.state.now;
+    } else if (type === 'elapsed') {
+      delta = this.state.now - start;
+    }
+
+    const days = Math.floor(delta / 86400);
+    delta -= days * 86400;
+
+    const hours = Math.floor(delta / 3600) % 24;
+    delta -= hours * 3600;
+
+    const minutes = Math.floor(delta / 60) % 60;
+    delta -= minutes * 60;
+
+    const seconds = delta % 60;
+    return `${this.pad(hours, 2)}:${this.pad(minutes, 2)}:${this.pad(seconds, 2)}`;
   }
 
   _tick() {
@@ -62,27 +94,63 @@ class ActiveFast extends React.Component {
           />
         </TouchableOpacity>
 
-        {/* <Progress.Circle
-          style={styles.progressCircle}
-          progress={this._getProgress()}
-          size={300}
-          borderWidth={0}
-          thickness={20}
-          showsText={true}
-          animated={true}
-          strokeCap={'round'}
-          color={Colors.light_text2}
-          unfilledColor={Colors.contrast1}
-        /> */}
-
         <AnimatedCircularProgress
-          size={200}
-          width={3}
-          fill={this.state.fill}
-          tintColor='#00e0ff'
-          backgroundColor='#3d5875'
+          style={styles.progressCircle}
+          size={300}
+          width={23}
+          backgroundWidth={10}
+          fill={this._getProgress() * 100}
+          tintColor={Colors.light_text2}
+          backgroundColor={Colors.contrast1}
+          rotation={0}
+          linecap='round'
+          capWidth='5'
         >
-          {fill => <Text>sac</Text>}
+          {fill => {
+            return (
+              <React.Fragment>
+                <Text
+                  style={{
+                    marginTop: 20,
+                    color: Colors.light_text2,
+                    fontFamily: 'Interstate-Regular',
+                  }}
+                >
+                  Remaining ({100 - parseFloat(fill).toFixed(0)}%)
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 40,
+                    paddingVertical: 14,
+                    color: Colors.light_text2,
+                    fontFamily: 'Interstate-Regular',
+                  }}
+                >
+                  {this._getFormattedTime('remaining')}
+                </Text>
+                <Text
+                  style={{
+                    color: Colors.light_text2,
+                    fontSize: 10,
+                    fontFamily: 'Interstate-Regular',
+                  }}
+                >
+                  Elapsed Time ({parseFloat(fill).toFixed(0)}%)
+                </Text>
+
+                <Text
+                  style={{
+                    fontSize: 10,
+                    paddingVertical: 10,
+                    color: Colors.light_text2,
+                    fontFamily: 'Interstate-Regular',
+                  }}
+                >
+                  {this._getFormattedTime('elapsed')}
+                </Text>
+              </React.Fragment>
+            );
+          }}
         </AnimatedCircularProgress>
 
         <TouchableOpacity

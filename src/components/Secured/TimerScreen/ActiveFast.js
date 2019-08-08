@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, ScrollView, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { SafeAreaView } from 'react-navigation';
 import moment from 'moment';
 import CircularProgress from './CircularProgress';
+import MetaDetails from './MetaDetails';
 import { removeActiveFast } from '../../../redux/actions/fasts';
 import styles from './styles';
-import Colors from '../../../utils/colors';
+import colors from '../../../utils/colors';
 
 class ActiveFast extends React.Component {
   static propTypes = {
@@ -40,29 +41,33 @@ class ActiveFast extends React.Component {
   }
 
   render() {
-    const {start, end} = this.props.activeFast;
-    const {now} = this.state;
+    const { start, end } = this.props.activeFast;
+    const { now } = this.state;
     return (
       <SafeAreaView style={styles.sav}>
-        <Text style={styles.header}>You are fasting!</Text>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.fastName}>{this.props.activeFast.title}</Text>
-          <Icon
-            iconStyle={styles.editIcon}
-            name='edit'
-            type='font-awesome'
-            color={Colors.light_text2}
-          />
-        </TouchableOpacity>
+        <ScrollView>
+          <Text style={styles.header}>You are fasting!</Text>
+          <TouchableOpacity style={styles.btn}>
+            <Text style={styles.fastName}>{this.props.activeFast.title}</Text>
+            <Icon
+              iconStyle={styles.editIcon}
+              name='edit'
+              type='font-awesome'
+              color={colors.light_text2}
+            />
+          </TouchableOpacity>
 
-        <CircularProgress start={start} end={end} now={now} />
+          <CircularProgress start={start} end={end} now={now} />
+          
+          <TouchableOpacity
+            style={styles.endFastBtn}
+            onPress={() => this.props.removeActiveFast()}
+          >
+            <Text style={styles.endFastTitle}>End Fast</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.endFastBtn}
-          onPress={() => this.props.removeActiveFast()}
-        >
-          <Text style={styles.endFastTitle}>End Fast</Text>
-        </TouchableOpacity>
+          <MetaDetails start={start} end={end} />
+        </ScrollView>
       </SafeAreaView>
     );
   }

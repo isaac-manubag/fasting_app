@@ -82,4 +82,26 @@ export default StyleSheet.create({
     color: colors.light_text2,
   },
   progressCircle: { alignSelf: 'center' },
+  progressText1: {
+    marginTop: 20,
+    color: colors.light_text2,
+    fontFamily: fonts.interstate_regular,
+  },
+  progressText2: {
+    fontSize: 40,
+    paddingVertical: 14,
+    color: colors.light_text2,
+    fontFamily: fonts.interstate_regular,
+  },
+  progressText3: {
+    color: colors.light_text2,
+    fontSize: 10,
+    fontFamily: fonts.interstate_regular,
+  },
+  progressText4: {
+    fontSize: 10,
+    paddingVertical: 10,
+    color: colors.light_text2,
+    fontFamily: fonts.interstate_regular,
+  },
 });

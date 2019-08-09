@@ -1,14 +1,18 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Text, TouchableOpacity, ScrollView, View } from 'react-native';
+import { Text, Alert, TouchableOpacity, ScrollView, View } from 'react-native';
 import { Icon, Overlay } from 'react-native-elements';
 import { SafeAreaView } from 'react-navigation';
 import moment from 'moment';
 import CircularProgress from './CircularProgress';
 import MetaDetails from './MetaDetails';
 import FastCards from '../FastCards';
-import { removeActiveFast } from '../../../redux/actions/fasts';
+import {
+  removeActiveFast,
+  updateActiveFast,
+} from '../../../redux/actions/fasts';
 import styles from './styles';
 import colors from '../../../utils/colors';
 import fasts from '../../../utils/fasts';
@@ -16,6 +20,7 @@ import fasts from '../../../utils/fasts';
 class ActiveFast extends React.Component {
   static propTypes = {
     removeActiveFast: PropTypes.func,
+    updateActiveFast: PropTypes.func,
   };
 
   constructor(props) {
@@ -23,15 +28,53 @@ class ActiveFast extends React.Component {
 
     this.state = {
       now: moment().unix(),
+      overlayVisible: false,
     };
 
     this._tick = this._tick.bind(this);
+    this._setSelectedUpdate = this._setSelectedUpdate.bind(this);
   }
 
   _tick() {
     this.setState({
       now: moment().unix(),
     });
+  }
+
+  _setSelectedUpdate(item) {
+    const { start, end, title } = this.props.activeFast;
+
+    Alert.alert(
+      'Change Fast?',
+      `Change ${title} to ${item.title}`,
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+          onPress: () => {
+            this.setState({
+              overlayVisible: false,
+            });
+          },
+        },
+        {
+          text: 'Change',
+          onPress: () => {
+            this.setState({
+              overlayVisible: false,
+            });
+
+            this.props.updateActiveFast(this.props.activeFast.id, {
+              start,
+              end,
+              title: item.title,
+              time_to_fast: item.time_to_fast,
+            });
+          },
+        },
+      ],
+      { cancelable: false }
+    );
   }
 
   componentDidMount() {
@@ -44,35 +87,49 @@ class ActiveFast extends React.Component {
 
   render() {
     const { start, end } = this.props.activeFast;
-    const { now } = this.state;
+    const { now, overlayVisible } = this.state;
     return (
       <SafeAreaView style={styles.sav}>
         <ScrollView>
           <Overlay
-            isVisible={true}
-            windowBackgroundColor='rgba(255, 255, 255, .2)'
-            overlayBackgroundColor='rgba(255, 255, 255, 0.0)'
+            isVisible={overlayVisible}
+            windowBackgroundColor="rgba(255, 255, 255, .2)"
+            overlayBackgroundColor={colors.dark_bg}
+            overlayStyle={{ borderRadius: 20 }}
+            onBackdropPress={() => this.setState({ overlayVisible: false })}
           >
-            <View>
+            <ScrollView>
               {fasts.map(item => {
                 return (
-                  <FastCards.Container key={item.id} onPress={() => alert('s')}>
-                    <FastCards.Title text={item.title} />
-                    <FastCards.Description
-                      text={`${item.time_to_fast} hours`}
-                    />
-                  </FastCards.Container>
+                  <View style={{ paddingVertical: 10 }}>
+                    <FastCards.Container
+                      key={item.id}
+                      onPress={() => this._setSelectedUpdate(item)}
+                    >
+                      <FastCards.Title text={item.title} />
+                      <FastCards.Description
+                        text={`${item.time_to_fast} hours`}
+                      />
+                    </FastCards.Container>
+                  </View>
                 );
               })}
-            </View>
+            </ScrollView>
           </Overlay>
           <Text style={styles.header}>You are fasting!</Text>
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => {
+              this.setState({
+                overlayVisible: true,
+              });
+            }}
+          >
             <Text style={styles.fastName}>{this.props.activeFast.title}</Text>
             <Icon
               iconStyle={styles.editIcon}
-              name='edit'
-              type='font-awesome'
+              name="edit"
+              type="font-awesome"
               color={colors.light_text2}
             />
           </TouchableOpacity>
@@ -96,9 +153,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   removeActiveFast,
+  updateActiveFast,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(ActiveFast);

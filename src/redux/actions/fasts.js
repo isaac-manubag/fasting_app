@@ -24,6 +24,14 @@ export const setActiveFast = (id, title, start, end) => ({
   },
 });
 
+export const updateActiveFast = (id, item) => ({
+  type: constants.fast.UPDATE_ACTIVE_FAST,
+  payload: {
+    id,
+    item,
+  },
+});
+
 export const removeActiveFast = () => ({
   type: constants.fast.REMOVE_ACTIVE_FAST,
 });

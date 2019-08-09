@@ -14,6 +14,7 @@ const defaultState = {
 export default function fastsReducer(state = defaultState, action) {
   switch (action.type) {
     case constants.fast.SET_ACTIVE_FAST:
+      console.log(action.payload);
       const { id, start, end, title } = action.payload;
       return {
         ...state,
@@ -34,11 +35,11 @@ export default function fastsReducer(state = defaultState, action) {
           end: null,
         },
       };
-    
-      case constants.fast.TOGGLE_PROCESSING:
+
+    case constants.fast.TOGGLE_PROCESSING:
       return {
         ...state,
-        processing: action.payload.processing
+        processing: action.payload.processing,
       };
 
     default:

@@ -22,7 +22,6 @@ export const userFastingFlow = ({ dispatch }) => next => async action => {
       const start = moment().unix();
       const end = moment()
         .add(item.time_to_fast, 'hours')
-        // .add(2, 'minutes')
         .unix();
 
       firestoreRef
@@ -40,6 +39,41 @@ export const userFastingFlow = ({ dispatch }) => next => async action => {
         .catch(error => {
           dispatch(toggleProcessing(false));
           console.log('fast add err: ', error);
+        });
+    } catch (e) {
+      dispatch(removeActiveFast());
+      dispatch(toggleProcessing(false));
+
+      if (e.message === "Cannot read property 'uid' of null") {
+        dispatch(logout());
+      }
+
+      throw e;
+    }
+  } else if (action.type === constants.fast.UPDATE_ACTIVE_FAST) {
+    dispatch(toggleProcessing(true));
+
+    try {
+      const { item, id } = action.payload;
+      const start = item.start;
+      const end = moment(moment.unix(item.start))
+        .add(item.time_to_fast, 'hours')
+        .unix();
+
+      firestoreRef
+        .doc(id)
+        .update({
+          title: item.title,
+          start,
+          end,
+        })
+        .then(() => {
+          dispatch(setActiveFast(id, item.title, item.start, end));
+          dispatch(toggleProcessing(false));
+        })
+        .catch(error => {
+          dispatch(toggleProcessing(false));
+          throw error;
         });
     } catch (e) {
       dispatch(removeActiveFast());

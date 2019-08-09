@@ -1,5 +1,12 @@
 import constants from '../../utils/constants';
 
+export const toggleProcessing = processing => ({
+  type: constants.fast.TOGGLE_PROCESSING,
+  payload: {
+    processing,
+  },
+});
+
 export const startFast = item => ({
   type: constants.fast.START_FAST,
   payload: {

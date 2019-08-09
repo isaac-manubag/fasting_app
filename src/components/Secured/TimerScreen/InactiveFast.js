@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Text, Alert } from 'react-native';
+import { Text, Alert, ActivityIndicator, View } from 'react-native';
 import { Icon, Button } from 'react-native-elements';
 import { SafeAreaView, withNavigation } from 'react-navigation';
 import Carousel from 'react-native-snap-carousel';
@@ -15,6 +15,7 @@ class InactiveFast extends React.Component {
   static propTypes = {
     navigation: PropTypes.object,
     user: PropTypes.object,
+    processing: PropTypes.bool,
   };
 
   constructor(props) {
@@ -38,7 +39,7 @@ class InactiveFast extends React.Component {
           onPress: () => this.props.startFast(item),
         },
       ],
-      { cancelable: false }
+      { cancelable: false },
     );
   }
 
@@ -54,11 +55,11 @@ class InactiveFast extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.sav}>
-        <Text style={styles.header}>You are not fasting</Text>
+        <Text style={styles.header}>You are not fasting {JSON.stringify(this.props.processing)}</Text>
         <Icon
           iconStyle={styles.warnIcon}
-          name="exclamation-triangle"
-          type="font-awesome"
+          name='exclamation-triangle'
+          type='font-awesome'
           color={Colors.light_text2}
         />
         <Text style={styles.paragraph}>
@@ -66,26 +67,34 @@ class InactiveFast extends React.Component {
           abouth our fasts
         </Text>
         <Button
-          title="See all fasts"
+          title='See all fasts'
           buttonStyle={styles.btn}
           titleStyle={styles.btnTitle}
           onPress={() => this.props.navigation.navigate('Fasts')}
         />
-        <Carousel
-          ref={c => (this._slider1Ref = c)}
-          data={fastItems}
-          renderItem={this._renderItem}
-          sliderWidth={sliderWidth}
-          itemWidth={itemWidth}
-          inactiveSlideScale={0.94}
-          inactiveSlideOpacity={0.7}
-        />
+        {this.props.processing ? (
+          <View>
+            <ActivityIndicator size='large' />
+          </View>
+        ) : (
+          <Carousel
+            ref={c => (this._slider1Ref = c)}
+            data={fastItems}
+            renderItem={this._renderItem}
+            sliderWidth={sliderWidth}
+            itemWidth={itemWidth}
+            inactiveSlideScale={0.94}
+            inactiveSlideOpacity={0.7}
+          />
+        )}
       </SafeAreaView>
     );
   }
 }
 
-const mapStateToProps = null;
+const mapStateToProps = state => ({
+  processing: state.fasts.processing,
+});
 
 const mapDispatchToProps = {
   startFast,
@@ -93,5 +102,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(withNavigation(InactiveFast));

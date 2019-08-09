@@ -77,6 +77,7 @@ export default StyleSheet.create({
     marginBottom: 0,
     paddingHorizontal: '4%',
     color: colors.dark_bg2,
+    fontFamily: fonts.interstate_regular
   },
   btnTitle: {
     color: colors.light_text2,

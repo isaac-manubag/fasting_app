@@ -20,10 +20,7 @@ export default function CircularProgress({ end, start, now }) {
       delta = now - start;
     }
 
-    const days = Math.floor(delta / 86400);
-    delta -= days * 86400;
-
-    const hours = Math.floor(delta / 3600) % 24;
+    const hours = Math.floor(delta / 3600);
     delta -= hours * 3600;
 
     const minutes = Math.floor(delta / 60) % 60;

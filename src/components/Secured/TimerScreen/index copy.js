@@ -21,10 +21,10 @@ class TimerScreen extends React.Component {
 
   /**
    * on home screen mount
-   * - get local storage activeFast, if not present fetch users active fast from firebase
+   * ✔✔✔ get local storage activeFast, if not present fetch users active fast from firebase
    * - if both actions on prev step does not return a value, then show user start a fast message
    * - if you get a value from step 1, calculate things and show user the percentage done, remaining time, etc...
-   * - update the values every 30seconds
+   * ✔✔✔ update the values every sec
    */
 
   /**
@@ -41,8 +41,8 @@ class TimerScreen extends React.Component {
 
   /**
    * todo-list
-   * - update login page, make it nice :)
-   * - update home screen make it nice
+   * ✔✔✔ update login page, make it nice :)
+   * ✔✔✔ update home screen make it nice
    * - add history screen
    * - add profile screen
    * - add fasts screen, just a list of all fast types

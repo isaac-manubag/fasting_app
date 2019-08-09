@@ -1,6 +1,7 @@
 import constants from '../../utils/constants';
 
 const defaultState = {
+  processing: false,
   activeFast: {
     id: null,
     title: null,
@@ -32,6 +33,12 @@ export default function fastsReducer(state = defaultState, action) {
           start: null,
           end: null,
         },
+      };
+    
+      case constants.fast.TOGGLE_PROCESSING:
+      return {
+        ...state,
+        processing: action.payload.processing
       };
 
     default:

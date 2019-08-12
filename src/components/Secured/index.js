@@ -1,9 +1,11 @@
+import React from 'react';
 import {
   createAppContainer,
   createMaterialTopTabNavigator,
 } from 'react-navigation';
+import { Icon } from 'react-native-elements';
 import TimerScreen from './TimerScreen';
-import FastsScreen from './FastsScreen';
+import FastsScreenNavigator from './FastsScreen/FastsScreenNavigator';
 import HistoryScreen from './HistoryScreen';
 import ProfileScreen from './ProfileScreen';
 import Colors from '../../utils/colors';
@@ -13,7 +15,12 @@ const RouteConfigs = {
     screen: TimerScreen,
   },
   Fasts: {
-    screen: FastsScreen,
+    screen: FastsScreenNavigator,
+    navigationOptions: () => ({
+      tabBarIcon: () => (
+        <Icon name="bars" type="font-awesome" color={Colors.light_text2} />
+      ),
+    }),
   },
   History: {
     screen: HistoryScreen,

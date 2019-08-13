@@ -9,10 +9,7 @@ import moment from 'moment';
 import CircularProgress from './CircularProgress';
 import MetaDetails from './MetaDetails';
 import FastCards from '../FastCards';
-import {
-  endFast,
-  updateActiveFast,
-} from '../../../redux/actions/fasts';
+import { endFast, updateActiveFast } from '../../../redux/actions/fasts';
 import styles from './styles';
 import colors from '../../../utils/colors';
 import fasts from '../../../utils/fasts';
@@ -90,7 +87,6 @@ class ActiveFast extends React.Component {
     const { now, overlayVisible } = this.state;
     return (
       <SafeAreaView style={styles.sav}>
-      
         <ScrollView>
           <Text>{JSON.stringify(this.props.activeFast)}</Text>
           <Overlay

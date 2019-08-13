@@ -25,5 +25,6 @@ export default StyleSheet.create({
     height: '100%',
     backgroundColor: Colors.dark_bg,
   },
-  google: { backgroundColor: '#db3236' },
+  google: { backgroundColor: '#db3236', marginHorizontal: 40 },
+  fb: { marginHorizontal: 40, marginTop: 40 },
 });

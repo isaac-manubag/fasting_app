@@ -29,6 +29,7 @@ export const userFastingFlow = ({ dispatch }) => next => async action => {
           title: item.title,
           start,
           end,
+          end_time: null,
           completed: false,
           user: firebase.auth().currentUser.uid,
         })
@@ -100,6 +101,7 @@ export const userFastingFlow = ({ dispatch }) => next => async action => {
         .doc(id)
         .update({
           completed,
+          end_time: moment().unix(),
         })
         .then(() => {
           dispatch(removeActiveFast());

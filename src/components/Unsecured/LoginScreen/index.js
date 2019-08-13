@@ -48,6 +48,7 @@ class Login extends React.Component {
         ) : (
           <React.Fragment>
             <SocialIcon
+              style={styles.fb}
               title="Sign In With Facebook"
               button
               type="facebook"

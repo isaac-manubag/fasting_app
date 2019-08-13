@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 import { setActiveFast } from '../../../redux/actions/fasts';
-import Colors from '../../../utils/colors';
+import colors from '../../../utils/colors';
 import ActiveFast from './ActiveFast';
 import InactiveFast from './InactiveFast';
 
 class TimerScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = () => ({
     tabBarIcon: (
-      <Icon name="clock-o" type="font-awesome" color={Colors.light_text2} />
+      <Icon name="clock-o" type="font-awesome" color={colors.light_text2} />
     ),
   });
 

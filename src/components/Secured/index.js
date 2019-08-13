@@ -24,6 +24,12 @@ const RouteConfigs = {
   },
   History: {
     screen: HistoryScreen,
+    navigationOptions: () => ({
+      tabBarIcon: (
+        <Icon name="history" type="font-awesome" color={Colors.light_text2} />
+      ),
+      title: 'Home',
+    }),
   },
   Profile: {
     screen: ProfileScreen,

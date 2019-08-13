@@ -1,19 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Text } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { Text, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { logout } from '../../../redux/actions/auth';
 import { setActiveFast } from '../../../redux/actions/fasts';
 import styles from './styles';
-import Colors from '../../../utils/colors';
+import colors from '../../../utils/colors';
 
 class HistoryScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    tabBarIcon: (
-      <Icon name="history" type="font-awesome" color={Colors.light_text2} />
-    ),
+    title: 'History',
   });
 
   static propTypes = {
@@ -27,7 +25,10 @@ class HistoryScreen extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.sav}>
-        <Text>history</Text>
+        <ScrollView contentContainerStyle={styles.sv}>
+          <Text style={styles.text}>asd</Text>
+          <Text style={styles.text}>123}</Text>
+        </ScrollView>
       </SafeAreaView>
     );
   }
@@ -42,7 +43,30 @@ const mapDispatchToProps = {
   setActiveFast,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HistoryScreen);
+const HistoryScreenNavigator = createStackNavigator(
+  {
+    HistoryScreen: {
+      screen: connect(
+        mapStateToProps,
+        mapDispatchToProps,
+      )(HistoryScreen),
+    },
+  },
+  {
+    initialRouteName: 'HistoryScreen',
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: colors.dark_bg,
+        borderBottomWidth: 0,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: colors.light_text2,
+      },
+    },
+  },
+);
+
+export default createAppContainer(HistoryScreenNavigator);

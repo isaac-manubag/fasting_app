@@ -22,6 +22,7 @@ export default {
   fast: {
     TOGGLE_PROCESSING: `${fast} TOGGLE_PROCESSING`,
     START_FAST: `${fast} START_FAST`,
+    END_FAST: `${fast} END_FAST`,
     SET_ACTIVE_FAST: `${fast} SET_ACTIVE_FAST`,
     UPDATE_ACTIVE_FAST: `${fast} UPDATE_ACTIVE_FAST`,
     REMOVE_ACTIVE_FAST: `${fast} REMOVE_ACTIVE_FAST`,

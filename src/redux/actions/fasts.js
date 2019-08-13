@@ -14,6 +14,13 @@ export const startFast = item => ({
   },
 });
 
+export const endFast = item => ({
+  type: constants.fast.END_FAST,
+  payload: {
+    item,
+  },
+});
+
 export const setActiveFast = (id, title, start, end) => ({
   type: constants.fast.SET_ACTIVE_FAST,
   payload: {

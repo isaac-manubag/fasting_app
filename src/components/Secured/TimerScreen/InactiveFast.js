@@ -55,7 +55,7 @@ class InactiveFast extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.sav}>
-        <Text style={styles.header}>You are not fasting {JSON.stringify(this.props.processing)}</Text>
+        <Text style={styles.header}>You are not fasting</Text>
         <Icon
           iconStyle={styles.warnIcon}
           name='exclamation-triangle'

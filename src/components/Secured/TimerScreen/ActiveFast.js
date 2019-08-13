@@ -10,7 +10,7 @@ import CircularProgress from './CircularProgress';
 import MetaDetails from './MetaDetails';
 import FastCards from '../FastCards';
 import {
-  removeActiveFast,
+  endFast,
   updateActiveFast,
 } from '../../../redux/actions/fasts';
 import styles from './styles';
@@ -19,7 +19,7 @@ import fasts from '../../../utils/fasts';
 
 class ActiveFast extends React.Component {
   static propTypes = {
-    removeActiveFast: PropTypes.func,
+    endFast: PropTypes.func,
     updateActiveFast: PropTypes.func,
   };
 
@@ -90,7 +90,9 @@ class ActiveFast extends React.Component {
     const { now, overlayVisible } = this.state;
     return (
       <SafeAreaView style={styles.sav}>
+      
         <ScrollView>
+          <Text>{JSON.stringify(this.props.activeFast)}</Text>
           <Overlay
             isVisible={overlayVisible}
             windowBackgroundColor="rgba(255, 255, 255, .2)"
@@ -101,7 +103,7 @@ class ActiveFast extends React.Component {
             <ScrollView>
               {fasts.map(item => {
                 return (
-                  <View style={{ paddingVertical: 10 }}>
+                  <View style={{ paddingVertical: 10 }} key={item.id}>
                     <FastCards.Container
                       key={item.id}
                       onPress={() => this._setSelectedUpdate(item)}
@@ -136,7 +138,7 @@ class ActiveFast extends React.Component {
           <CircularProgress start={start} end={end} now={now} />
           <TouchableOpacity
             style={styles.endFastBtn}
-            onPress={() => this.props.removeActiveFast()}
+            onPress={() => this.props.endFast(this.props.activeFast)}
           >
             <Text style={styles.endFastTitle}>End Fast</Text>
           </TouchableOpacity>
@@ -152,7 +154,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  removeActiveFast,
+  endFast,
   updateActiveFast,
 };
 

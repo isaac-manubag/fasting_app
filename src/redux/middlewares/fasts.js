@@ -21,7 +21,8 @@ export const userFastingFlow = ({ dispatch }) => next => async action => {
       const { item } = action.payload;
       const start = moment().unix();
       const end = moment()
-        .add(item.time_to_fast, 'hours')
+        // .add(item.time_to_fast, 'hours')
+        .add(30, 'seconds')
         .unix();
 
       firestoreRef
@@ -77,6 +78,42 @@ export const userFastingFlow = ({ dispatch }) => next => async action => {
         });
     } catch (e) {
       dispatch(removeActiveFast());
+      dispatch(toggleProcessing(false));
+
+      if (e.message === "Cannot read property 'uid' of null") {
+        dispatch(logout());
+      }
+
+      throw e;
+    }
+  } else if (action.type === constants.fast.END_FAST) {
+    dispatch(toggleProcessing(true));
+
+    try {
+      const { item } = action.payload;
+      const {id, end} = item;
+      let completed = false;
+      
+      if (moment().unix() >= end) {
+        completed = true;
+      }
+
+
+      firestoreRef
+        .doc(id)
+        .update({
+          completed,
+        })
+        .then(() => {
+          dispatch(removeActiveFast());
+          dispatch(toggleProcessing(false));
+        })
+        .catch(error => {
+          dispatch(removeActiveFast());
+          dispatch(toggleProcessing(false));
+          throw error;
+        });
+    } catch (e) {
       dispatch(toggleProcessing(false));
 
       if (e.message === "Cannot read property 'uid' of null") {

@@ -5,19 +5,25 @@ import rootReducer from './reducers';
 import apiMiddleware from './middlewares/api';
 import { authMiddleware } from './middlewares/auth';
 import { fastsMiddleware } from './middlewares/fasts';
+import { historyMiddleware } from './middlewares/history';
 
 const composeEnhancers = compose;
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth', 'fasts'],
+  whitelist: ['auth', 'fasts', 'history'],
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = createStore(
   persistedReducer,
   composeEnhancers(
-    applyMiddleware(...authMiddleware, ...fastsMiddleware, apiMiddleware)
+    applyMiddleware(
+      ...authMiddleware,
+      ...fastsMiddleware,
+      ...historyMiddleware,
+      apiMiddleware
+    )
   )
 );
 

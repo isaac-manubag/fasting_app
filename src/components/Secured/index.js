@@ -28,7 +28,6 @@ const RouteConfigs = {
       tabBarIcon: (
         <Icon name="history" type="font-awesome" color={Colors.light_text2} />
       ),
-      title: 'Home',
     }),
   },
   Profile: {

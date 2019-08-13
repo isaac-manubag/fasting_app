@@ -34,7 +34,8 @@ class FastsScreen extends React.Component {
                 key={item.id}
                 containerStyle={{
                   marginVertical: 10,
-                  paddingVertical: 36,
+                  paddingTop: 12,
+                  paddingBottom: 32,
                   marginHorizontal: 10,
                 }}
                 onPress={() =>

@@ -1,6 +1,4 @@
-import React from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-import { Icon } from 'react-native-elements';
 import FastsScreen from './FastsScreen';
 import FastDetailsScreen from './FastDetailsScreen';
 import colors from '../../../utils/colors';

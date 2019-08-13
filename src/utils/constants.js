@@ -1,6 +1,7 @@
 const app = '[app]';
 const auth = '[auth]';
 const fast = '[fast]';
+const history = '[history]';
 
 export default {
   app: {
@@ -26,5 +27,11 @@ export default {
     SET_ACTIVE_FAST: `${fast} SET_ACTIVE_FAST`,
     UPDATE_ACTIVE_FAST: `${fast} UPDATE_ACTIVE_FAST`,
     REMOVE_ACTIVE_FAST: `${fast} REMOVE_ACTIVE_FAST`,
+  },
+  history: {
+    GET_HISTORY: `${history} GET_HISTORY`,
+    CLEAR_HISTORY: `${history} CLEAR_HISTORY`,
+    SET_HISTORY: `${history} SET_HISTORY`,
+    TOGGLE_PROCESSING: `${history} TOGGLE_PROCESSING`,
   },
 };

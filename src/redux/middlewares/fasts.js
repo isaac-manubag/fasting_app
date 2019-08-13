@@ -1,4 +1,3 @@
-// react dotenv version 1551921186
 import firebase from 'react-native-firebase';
 import moment from 'moment';
 import constants from '../../utils/constants';
@@ -39,7 +38,6 @@ export const userFastingFlow = ({ dispatch }) => next => async action => {
         })
         .catch(error => {
           dispatch(toggleProcessing(false));
-          console.log('fast add err: ', error);
         });
     } catch (e) {
       dispatch(removeActiveFast());
@@ -91,13 +89,12 @@ export const userFastingFlow = ({ dispatch }) => next => async action => {
 
     try {
       const { item } = action.payload;
-      const {id, end} = item;
+      const { id, end } = item;
       let completed = false;
-      
+
       if (moment().unix() >= end) {
         completed = true;
       }
-
 
       firestoreRef
         .doc(id)

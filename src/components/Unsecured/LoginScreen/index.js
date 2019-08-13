@@ -35,7 +35,7 @@ class Login extends React.Component {
           source={require('../../../assets/images/app-logo.png')}
           style={styles.appLogo}
         />
-        <Text style={styles.title}>Sigin to your account</Text>
+        <Text style={styles.title}>Signin to your account</Text>
         <Text style={styles.paragraph}>
           Automatically sync your fasting history to the cloud, sleect form a
           range of fasts, view stats and save your progress.

@@ -31,6 +31,7 @@ class FastsScreen extends React.Component {
           {fasts.map(item => {
             return (
               <FastCards.Container
+                key={item.id}
                 containerStyle={{
                   marginVertical: 10,
                   paddingVertical: 36,

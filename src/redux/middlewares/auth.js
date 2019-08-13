@@ -41,13 +41,15 @@ export const userLoginFlow = ({ dispatch }) => next => async action => {
         data.accessToken
       );
 
-      const firebaseUserCredential = await firebase.auth().signInWithCredential(credential);
-console.log(firebaseUserCredential)
+      const firebaseUserCredential = await firebase
+        .auth()
+        .signInWithCredential(credential);
+
       dispatch({
         type: constants.auth.LOGIN_SUCCESS,
         payload: {
-          user: firebaseUserCredential
-        }
+          user: firebaseUserCredential,
+        },
       });
     } catch (e) {
       dispatch({
@@ -64,22 +66,28 @@ console.log(firebaseUserCredential)
         },
       });
 
-      await GoogleSignin.configure();
+      await GoogleSignin.configure({
+        webClientId:
+          '1050830759732-h1jvv8c1fnv1fnjqaictr6e10i2i7iea.apps.googleusercontent.com',
+        offlineAccess: true,
+      });
 
       const data = await GoogleSignin.signIn();
-
+      console.log(data);
       const credential = firebase.auth.GoogleAuthProvider.credential(
         data.idToken,
         data.accessToken
       );
 
-      const firebaseUserCredential = await firebase.auth().signInWithCredential(credential);
+      const firebaseUserCredential = await firebase
+        .auth()
+        .signInWithCredential(credential);
 
       dispatch({
         type: constants.auth.LOGIN_SUCCESS,
         payload: {
-          user: firebaseUserCredential
-        }
+          user: firebaseUserCredential,
+        },
       });
     } catch (e) {
       dispatch({

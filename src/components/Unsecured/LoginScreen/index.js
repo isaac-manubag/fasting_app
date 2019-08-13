@@ -41,7 +41,7 @@ class Login extends React.Component {
           range of fasts, view stats and save your progress.
         </Text>
 
-        {this.props.authenticating ? (
+        {!this.props.authenticating ? (
           <View>
             <ActivityIndicator size="large" />
           </View>

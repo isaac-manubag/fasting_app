@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "1050830759732-7d48q6uv1m3nccjgmqgfqgsg1mo4n98u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.isaacmanubag.fastingapp",
+            "certificate_hash": "03cd57cd277f864047cf917794a1091d1051702b"
+          }
+        },
+        {
+          "client_id": "1050830759732-ua648leb57bklv4jdhnpek554f507b6r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.isaacmanubag.fastingapp",
+            "certificate_hash": "eee93c02170b106f17ce147ad80e325fef4614c2"
+          }
+        },
+        {
           "client_id": "1050830759732-h1jvv8c1fnv1fnjqaictr6e10i2i7iea.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -26,7 +26,7 @@ export default function authReducer(state = defaultState, action) {
       return {
         ...state,
         isLoggedIn: false,
-        user: null
+        user: null,
       };
 
     case constants.auth.LOGIN_ERROR:
@@ -34,7 +34,7 @@ export default function authReducer(state = defaultState, action) {
         ...state,
         authenticating: false,
         isLoggedIn: false,
-        user: null
+        user: null,
       };
 
     default:

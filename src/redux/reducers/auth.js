@@ -3,6 +3,7 @@ import constants from '../../utils/constants';
 const defaultState = {
   authenticating: false,
   isLoggedIn: false,
+  user: null,
 };
 
 export default function authReducer(state = defaultState, action) {
@@ -18,12 +19,14 @@ export default function authReducer(state = defaultState, action) {
         ...state,
         isLoggedIn: true,
         authenticating: false,
+        user: action.payload.user,
       };
 
     case constants.auth.LOGOUT:
       return {
         ...state,
         isLoggedIn: false,
+        user: null
       };
 
     case constants.auth.LOGIN_ERROR:
@@ -31,6 +34,7 @@ export default function authReducer(state = defaultState, action) {
         ...state,
         authenticating: false,
         isLoggedIn: false,
+        user: null
       };
 
     default:

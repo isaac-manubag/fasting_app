@@ -41,10 +41,13 @@ export const userLoginFlow = ({ dispatch }) => next => async action => {
         data.accessToken
       );
 
-      await firebase.auth().signInWithCredential(credential);
-
+      const firebaseUserCredential = await firebase.auth().signInWithCredential(credential);
+console.log(firebaseUserCredential)
       dispatch({
         type: constants.auth.LOGIN_SUCCESS,
+        payload: {
+          user: firebaseUserCredential
+        }
       });
     } catch (e) {
       dispatch({
@@ -70,10 +73,13 @@ export const userLoginFlow = ({ dispatch }) => next => async action => {
         data.accessToken
       );
 
-      await firebase.auth().signInWithCredential(credential);
+      const firebaseUserCredential = await firebase.auth().signInWithCredential(credential);
 
       dispatch({
         type: constants.auth.LOGIN_SUCCESS,
+        payload: {
+          user: firebaseUserCredential
+        }
       });
     } catch (e) {
       dispatch({

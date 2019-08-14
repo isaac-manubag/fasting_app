@@ -70,7 +70,7 @@ class ActiveFast extends React.Component {
           },
         },
       ],
-      { cancelable: false }
+      { cancelable: false },
     );
   }
 
@@ -83,14 +83,14 @@ class ActiveFast extends React.Component {
   }
 
   render() {
-    const { start, end } = this.props.activeFast;
+    const { start, end, title } = this.props.activeFast;
     const { now, overlayVisible } = this.state;
     return (
       <SafeAreaView style={styles.sav}>
         <ScrollView>
           <Overlay
             isVisible={overlayVisible}
-            windowBackgroundColor="rgba(255, 255, 255, .2)"
+            windowBackgroundColor='rgba(255, 255, 255, .2)'
             overlayBackgroundColor={colors.dark_bg}
             overlayStyle={{ borderRadius: 20 }}
             onBackdropPress={() => this.setState({ overlayVisible: false })}
@@ -125,15 +125,34 @@ class ActiveFast extends React.Component {
             <Text style={styles.fastName}>{this.props.activeFast.title}</Text>
             <Icon
               iconStyle={styles.editIcon}
-              name="edit"
-              type="font-awesome"
+              name='edit'
+              type='font-awesome'
               color={colors.light_text2}
             />
           </TouchableOpacity>
           <CircularProgress start={start} end={end} now={now} />
           <TouchableOpacity
             style={styles.endFastBtn}
-            onPress={() => this.props.endFast(this.props.activeFast)}
+            onPress={() => {
+              Alert.alert(
+                'End Fast?',
+                `End ${title}`,
+                [
+                  {
+                    text: 'Not Now',
+                    style: 'cancel',
+                  },
+                  {
+                    text: 'End Fast',
+                    onPress: () => {
+                      this.props.endFast(this.props.activeFast)
+                    },
+                  },
+                ],
+                { cancelable: false }
+              );
+              ;
+            }}
           >
             <Text style={styles.endFastTitle}>End Fast</Text>
           </TouchableOpacity>
@@ -155,5 +174,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(ActiveFast);

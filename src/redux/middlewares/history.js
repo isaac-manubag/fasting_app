@@ -20,6 +20,7 @@ export const getHistoryFlow = ({ dispatch }) => next => async action => {
         id: doc.id,
         start: data.start,
         end: data.end,
+        end_time: data.end_time,
         completed: data.completed,
         title: data.title,
       });

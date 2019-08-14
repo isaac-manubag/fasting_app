@@ -17,3 +17,12 @@
 - Firebase Firestore
 - Firebase Firestore Rules
 - Local Storage
+
+# Screenshots
+
+![Alt text](resources/screenshots/inactive.png "Inactive Fast")
+![Alt text](resources/screenshots/start-fast.png "Start a fast prompt")
+![Alt text](resources/screenshots/active-fasting.png "Active Fast Timer")
+![Alt text](resources/screenshots/fasts-screen.png "All Fast Types Screen")
+![Alt text](resources/screenshots/fast-details-screen.png "Specific Fast Screen")
+![Alt text](resources/screenshots/history-screen.png "History Screen")

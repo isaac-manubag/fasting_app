@@ -2,13 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import { Icon } from 'react-native-elements';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-import {
-  Text,
-  View,
-  FlatList,
-  RefreshControl,
-} from 'react-native';
+import { Text, View, FlatList, RefreshControl } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { getHistory, clearHistory } from '../../../redux/actions/history';
 import styles from './styles';
@@ -54,81 +50,35 @@ class HistoryScreen extends React.Component {
 
   renderItem = ({ item }) => {
     return (
-      <View
-        key={item.start}
-        style={{
-          flex: 1,
-          flexDirection: 'row',
-          padding: 20,
-
-        }}
-      >
-        <View style={{width: '100%'}}>
-          <Text
-            style={{
-              fontFamily: fonts.interstate_regular,
-              fontSize: 20,
-              color: colors.light_text2,
-            }}
-          >
-            {item.title}
-          </Text>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              display: 'flex',
-              marginTop: 10
-            }}
-          >
-            <Text
-              style={{
-                flex: 1,
-                fontFamily: fonts.interstate_light,
-                fontSize: 12,
-                color: colors.light_text2,
-              }}
-            >
-              Start Time: {"\n"}{moment(moment.unix(item.start)).format('LLL')}
+      <View key={item.start} style={styles.container}>
+        <View style={styles.item_container}>
+          <View style={styles.header_container}>
+            <Text style={styles.title}>{item.title}</Text>
+            <Icon
+              name={item.completed ? 'smile-o' : 'frown-o'}
+              type='font-awesome'
+              color={colors.dark_bg2}
+              style={{ flex: 1, alignSelf: 'flex-end' }}
+            />
+          </View>
+          <View style={styles.meta_container}>
+            <Text style={styles.meta_text}>
+              Start Time: {'\n'}
+              {moment(moment.unix(item.start)).format('LLL')}
             </Text>
-            <Text
-              style={{
-                flex: 1,
-                fontFamily: fonts.interstate_light,
-                fontSize: 12,
-                color: colors.light_text2,
-              }}
-            >
-              Target End Time: {"\n"}{moment(moment.unix(item.end)).format('LLL')}
+            <Text style={styles.meta_text}>
+              Target End Time: {'\n'}
+              {moment(moment.unix(item.end)).format('LLL')}
             </Text>
           </View>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              display: 'flex',
-              marginTop: 10
-            }}
-          >
-            <Text
-              style={{
-                flex: 1,
-                fontFamily: fonts.interstate_light,
-                fontSize: 12,
-                color: colors.light_text2,
-              }}
-            >
-              Actual End Time: {"\n"}{moment(moment.unix(item.end_time)).format('LLL')}
+          <View style={styles.meta_container}>
+            <Text style={styles.meta_text}>
+              Actual End Time: {'\n'}
+              {moment(moment.unix(item.end_time)).format('LLL')}
             </Text>
-            <Text
-              style={{
-                flex: 1,
-                fontFamily: fonts.interstate_light,
-                fontSize: 12,
-                color: colors.light_text2,
-              }}
-            >
-              Total Fast: {"\n"}{this.getTotalHours(item.end_time, item.start)} hours
+            <Text style={styles.meta_text}>
+              Total Fast: {'\n'}
+              {this.getTotalHours(item.end_time, item.start)} hours
             </Text>
           </View>
         </View>

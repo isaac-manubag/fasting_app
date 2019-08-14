@@ -31,7 +31,7 @@ export default StyleSheet.create({
     paddingVertical: 40,
   },
   warnIcon: {
-    fontSize: 100,
+    fontSize: 140,
   },
   editIcon: {
     fontSize: 20,
@@ -42,6 +42,10 @@ export default StyleSheet.create({
     ...globalStyles.paragraph,
     paddingTop: 40,
     paddingBottom: 20,
+    paddingHorizontal: 100,
+    fontSize: 20,
+    fontFamily: fonts.interstate_light,
+    lineHeight: 24,
   },
   fastName: {
     ...globalStyles.paragraph,
@@ -77,10 +81,11 @@ export default StyleSheet.create({
     marginBottom: 0,
     paddingHorizontal: '4%',
     color: colors.dark_bg2,
-    fontFamily: fonts.interstate_regular
+    fontFamily: fonts.interstate_regular,
   },
   btnTitle: {
     color: colors.light_text2,
+    fontFamily: fonts.interstate_light,
   },
   progressCircle: { alignSelf: 'center' },
   progressText1: {

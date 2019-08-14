@@ -4,7 +4,7 @@ import fonts from '../../../utils/fonts';
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: colors.light_text1,
+    backgroundColor: colors.light_text2,
     paddingVertical: 18,
     paddingHorizontal: 14,
     borderRadius: 20,

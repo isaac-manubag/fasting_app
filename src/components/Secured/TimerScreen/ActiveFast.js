@@ -88,7 +88,6 @@ class ActiveFast extends React.Component {
     return (
       <SafeAreaView style={styles.sav}>
         <ScrollView>
-          <Text>{JSON.stringify(this.props.activeFast)}</Text>
           <Overlay
             isVisible={overlayVisible}
             windowBackgroundColor="rgba(255, 255, 255, .2)"

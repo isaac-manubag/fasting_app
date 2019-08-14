@@ -39,7 +39,7 @@ const BottomTabNavigatorConfig = {
   swipeEnabled: false,
   tabBarPosition: 'bottom',
   lazy: true,
-  initialRouteName: 'History',
+  initialRouteName: 'Timer',
   tabBarOptions: {
     showIcon: true,
     upperCaseLabel: false,

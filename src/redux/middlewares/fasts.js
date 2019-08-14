@@ -7,6 +7,7 @@ import {
   toggleProcessing,
 } from '../actions/fasts';
 import { logout } from '../actions/auth';
+import { getHistory } from '../actions/history';
 
 const firestoreRef = firebase.firestore().collection('fasts');
 
@@ -20,8 +21,7 @@ export const userFastingFlow = ({ dispatch }) => next => async action => {
       const { item } = action.payload;
       const start = moment().unix();
       const end = moment()
-        // .add(item.time_to_fast, 'hours')
-        .add(30, 'seconds')
+        .add(item.time_to_fast, 'hours')
         .unix();
 
       firestoreRef
@@ -70,6 +70,7 @@ export const userFastingFlow = ({ dispatch }) => next => async action => {
         .then(() => {
           dispatch(setActiveFast(id, item.title, item.start, end));
           dispatch(toggleProcessing(false));
+          dispatch(getHistory());
         })
         .catch(error => {
           dispatch(toggleProcessing(false));
@@ -106,6 +107,7 @@ export const userFastingFlow = ({ dispatch }) => next => async action => {
         .then(() => {
           dispatch(removeActiveFast());
           dispatch(toggleProcessing(false));
+          dispatch(getHistory());
         })
         .catch(error => {
           dispatch(removeActiveFast());
